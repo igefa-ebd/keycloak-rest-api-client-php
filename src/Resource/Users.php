@@ -218,6 +218,20 @@ class Users extends Resource
         );
     }
 
+    public function resetPasswordEmail(string $realm, string $userId): void
+    {
+        $this->commandExecutor->executeCommand(
+            new Command(
+                '/admin/realms/{realm}/users/{userId}/reset-password-email',
+                Method::PUT,
+                [
+                    'realm' => $realm,
+                    'userId' => $userId,
+                ]
+            )
+        );
+    }
+
     public function credentials(string $realm, string $userId): CredentialCollection
     {
         return $this->queryExecutor->executeQuery(
